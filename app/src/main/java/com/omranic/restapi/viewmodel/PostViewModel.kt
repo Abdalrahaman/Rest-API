@@ -1,14 +1,19 @@
-package com.omranic.restapi
+package com.omranic.restapi.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.omranic.restapi.model.Post
+import com.omranic.restapi.repository.Repository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.SingleObserver
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import javax.inject.Inject
 
-class PostViewModel: ViewModel() {
+@HiltViewModel
+class PostViewModel @Inject constructor(private val repository: Repository): ViewModel() {
     private var posts = MutableLiveData<List<Post>>()
 
     fun getPosts(): LiveData<List<Post>> {
@@ -17,7 +22,7 @@ class PostViewModel: ViewModel() {
     }
 
     private fun loadPosts() {
-        ClientAPI.getINSTANCE().getPosts()
+        repository.getPosts()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : SingleObserver<List<Post>> {

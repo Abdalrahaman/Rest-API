@@ -1,9 +1,10 @@
-package com.omranic.restapi
+package com.omranic.restapi.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.omranic.restapi.databinding.PostItemBinding
+import com.omranic.restapi.model.Post
 
 class PostAdapter: RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 

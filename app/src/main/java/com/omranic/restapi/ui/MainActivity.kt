@@ -1,18 +1,21 @@
-package com.omranic.restapi
+package com.omranic.restapi.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.omranic.restapi.network.AppApiService
+import com.omranic.restapi.adapter.PostAdapter
+import com.omranic.restapi.viewmodel.PostViewModel
 import com.omranic.restapi.databinding.ActivityMainBinding
-import retrofit2.*
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var apiInterface: ApiInterface
+    private lateinit var apiInterface: AppApiService
     val adapter = PostAdapter()
 
     private lateinit var viewModel: PostViewModel
